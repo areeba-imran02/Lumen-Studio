@@ -172,6 +172,17 @@ button:disabled {opacity:.45 !important;}
 .stTabs [data-baseweb="tab-highlight"] {background:#F97316 !important; height:4px;}
 .stTabs [data-baseweb="tab-border"] {display:none;}
 .stTabs [data-baseweb="tab-panel"] {padding-top:16px;}
+/* ---- readability safety net (results) ---- */
+.stApp .result-head {color:#052E2A !important; -webkit-text-fill-color:#052E2A !important; opacity:1 !important;}
+.stApp .result-head span {color:#0B6B62 !important; -webkit-text-fill-color:#0B6B62 !important;}
+.stApp .runbar span, .stApp .runbar span * {color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important; opacity:1 !important;}
+.stApp .runbar b {color:#FDE68A !important; -webkit-text-fill-color:#FDE68A !important;}
+.stApp .statstrip .v {color:#052E2A !important; -webkit-text-fill-color:#052E2A !important; opacity:1 !important;}
+.stApp .statstrip .l {color:#1F4F47 !important; -webkit-text-fill-color:#1F4F47 !important; opacity:1 !important;}
+.stApp .stTabs button[role="tab"] {background:#E3F4EC !important; border:1.5px solid #7FD8BE !important; border-bottom:none !important; opacity:1 !important;}
+.stApp .stTabs button[role="tab"] p, .stApp .stTabs button[role="tab"] div {color:#0B3B36 !important; -webkit-text-fill-color:#0B3B36 !important; opacity:1 !important; font-weight:700 !important; font-size:1rem !important;}
+.stApp .stTabs button[role="tab"][aria-selected="true"] {background:#0B3B36 !important; border-color:#0B3B36 !important;}
+.stApp .stTabs button[role="tab"][aria-selected="true"] p, .stApp .stTabs button[role="tab"][aria-selected="true"] div {color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important;}
 [data-testid="stExpander"] {background:#FFFEF9; border:1px solid #BFEBDD !important; border-radius:12px;}
 [data-testid="stExpander"] summary p {color:#0F3D36 !important; font-weight:600;}
 [data-testid="stCode"], [data-testid="stCode"] pre {background:#F1FCF7 !important;}
