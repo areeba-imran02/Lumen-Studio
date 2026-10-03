@@ -1,4 +1,4 @@
-"""Agents, tasks and crew for Lumen Studio (CrewAI + Gemini)."""
+"""Agents, tasks and crew for Writify Studio (CrewAI + Gemini)."""
 from crewai import Agent, Crew, LLM, Process, Task
 
 from tools import make_search_tools
