@@ -280,6 +280,34 @@ header[data-testid="stHeader"]::before, header[data-testid="stHeader"]::after {d
 .st-key-sel_all button p, .st-key-sel_none button p {font-weight:800 !important; font-size:.82rem !important; letter-spacing:.06em;}
 .st-key-sel_none button {border:2px dashed #BE123C !important;}
 .st-key-chips button[kind="secondary"]:hover, .st-key-chips button[data-testid="stBaseButton-secondary"]:hover {background:#E3F4EC !important; border-color:#0F766E !important;}
+
+/* =================== FINAL POLISH 3 (alignment) =================== */
+/* labels: breathing room above the field */
+.st-key-input_card [data-testid="stWidgetLabel"] {margin-bottom:8px !important;}
+.st-key-input_card [data-testid="stTextInput"] {margin-top:6px;}
+.st-key-input_card .section-title {margin:4px 0 10px !important;}
+.st-key-input_card .hint-row {margin:0 0 14px !important;}
+.st-key-examples {margin-bottom:6px;}
+
+/* select all / clear / counter: one tidy, vertically centred row */
+.st-key-chip_tools {margin-top:14px;}
+.st-key-chip_tools [data-testid="stHorizontalBlock"] {grid-template-columns:150px 150px minmax(0,1fr) !important; align-items:center !important;}
+.st-key-chip_tools [data-testid="stMarkdownContainer"], .st-key-chip_tools [data-testid="stMarkdownContainer"] p {margin:0 !important;}
+.st-key-chip_tools [data-testid="stElementContainer"] {display:flex; align-items:center;}
+.st-key-chip_tools .count {display:inline-flex; align-items:center; height:2.4rem; padding:0 16px; border-radius:999px; background:#E3F4EC;
+  border:1.5px solid #7FD8BE; color:#0B3B36 !important; font-size:.88rem; font-weight:800;}
+.st-key-sel_all button, .st-key-sel_none button {min-height:2.6rem !important; width:100% !important;}
+
+/* Generate button: full width, centred, bold */
+.st-key-go_wrap {margin-top:6px;}
+.st-key-go_wrap, .st-key-go_wrap [data-testid="stElementContainer"], .st-key-go_wrap [data-testid="stButton"], .st-key-go_wrap div.stButton {width:100% !important; display:block !important;}
+.st-key-go_wrap button {width:100% !important; min-height:3.5rem !important; border-radius:14px !important; display:flex; align-items:center; justify-content:center;}
+.st-key-go_wrap button p {color:#FFFFFF !important; font-family:'Sora',sans-serif !important; font-size:1.15rem !important; font-weight:800 !important; letter-spacing:.02em; text-align:center; width:100%;}
+.st-key-go_wrap button p::before {content:"\2726\00a0\00a0"; color:#FDE68A;}
+.st-key-go_wrap button:disabled {background:#9CA3AF !important; box-shadow:none !important;}
+
+/* download buttons + summary row aligned */
+div.stDownloadButton > button p {font-weight:700 !important;}
 """
 
 # every output gets its own colour theme (bg / text / accent) with strong contrast
