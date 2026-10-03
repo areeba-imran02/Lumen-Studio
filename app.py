@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from crew_setup import (LANGUAGES, LENGTHS, MODELS, OUTPUTS, TONES,  # noqa: E402
+from crew_setup import (CUSTOM_LANG, LANGUAGES, LENGTHS, MODELS, OUTPUTS, TONES,  # noqa: E402
                         plan_steps, resolve_outputs, run_studio)
 
 st.set_page_config(page_title="Lumen Studio", page_icon=":material/auto_awesome:", layout="wide")
@@ -315,7 +315,7 @@ st.session_state.setdefault("history", [])
 st.session_state.setdefault("result", None)
 st.session_state.setdefault("topic", "")
 for _k, _ in OUTPUTS:
-    st.session_state.setdefault(f"sel_{_k}", True)
+    st.session_state.setdefault(f"sel_{_k}", False)
 
 
 def get_api_key() -> str:
@@ -350,6 +350,10 @@ with st.sidebar:
 
     st.markdown('<div class="side-h">Writing preferences</div>', unsafe_allow_html=True)
     language = st.selectbox("Output language", LANGUAGES)
+    if language == CUSTOM_LANG:
+        language = st.text_input("Type any language", placeholder="e.g. Arabic, Punjabi, Spanish, French").strip()
+    if language == CUSTOM_LANG:
+        language = st.text_input("Type any language", placeholder="e.g. French, Arabic, Punjabi, Spanish").strip() or "English"
     tone = st.selectbox("Tone of voice", TONES)
     length = st.selectbox("Blog length", list(LENGTHS.keys()), index=1)
     audience = st.text_input("Target audience", "Students and young professionals")
@@ -436,20 +440,36 @@ def pipeline_html(labels, done, active):
     return h + "</div>"
 
 
+def visible_pipeline(steps, selected, n_done):
+    """Show only the agents the user selected; background helpers (research / blog draft) stay hidden."""
+    vis = [(i, st_) for i, st_ in enumerate(steps) if st_[0] in selected]
+    labels = [v[1] for v in vis]
+    done = sum(1 for i, _ in vis if i < n_done)
+    active = next((j for j, (i, _) in enumerate(vis) if i >= n_done), -1)
+    return pipeline_html(labels, done, active)
+
+
 if go:
     topic = st.session_state.topic.strip()
     if len(topic) < 5:
         st.warning("Please describe the topic in a little more detail.")
+    elif not language:
+        st.warning("Please type the language you want in the sidebar (Output language > Custom language).")
     elif not selected:
         st.warning("Select at least one deliverable.")
     else:
-        steps = plan_steps(selected)
+        all_steps = plan_steps(selected)
+        # a blog drafted only for SEO is a background step: it runs but is not shown
+        steps = [st_ for st_ in all_steps if st_[0] != "blog" or "blog" in selected]
         holder = st.empty()
-        state = {"done": 0}
+        state = {"raw": 0, "done": 0}
         holder.markdown(pipeline_html(steps, 0, 0), unsafe_allow_html=True)
 
         def on_done(_o):
-            state["done"] += 1
+            key = all_steps[state["raw"]][0] if state["raw"] < len(all_steps) else None
+            state["raw"] += 1
+            if key != "blog" or "blog" in selected:
+                state["done"] += 1
             holder.markdown(pipeline_html(steps, state["done"], state["done"]), unsafe_allow_html=True)
 
         cfg = dict(topic=topic, audience=audience, tone=tone, language=language, length=length,
@@ -461,7 +481,8 @@ if go:
                 out = None
                 for n, mdl in enumerate(order):
                     state["done"] = 0
-                    holder.markdown(pipeline_html(steps, 0, 0), unsafe_allow_html=True)
+                    state["raw"] = 0
+                    holder.markdown(visible_pipeline(steps, selected, 0), unsafe_allow_html=True)
                     try:
                         out = run_studio(cfg, mdl, API_KEY, on_done)
                         break
@@ -473,10 +494,10 @@ if go:
                             continue
                         raise
             out.update(topic=topic, time=dt.datetime.now().strftime("%H:%M"),
-                       seconds=int(time.time() - start), agents=len(steps), keywords=keywords)
+                       seconds=int(time.time() - start), agents=len(all_steps), keywords=keywords)
             st.session_state.result = out
             st.session_state.history.append(out)
-            holder.markdown(pipeline_html(steps, len(steps), -1), unsafe_allow_html=True)
+            holder.markdown(visible_pipeline(steps, selected, len(steps)), unsafe_allow_html=True)
         except Exception as e:  # noqa: BLE001
             msg = str(e)
             if "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg:
