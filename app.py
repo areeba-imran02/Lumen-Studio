@@ -289,22 +289,27 @@ header[data-testid="stHeader"]::before, header[data-testid="stHeader"]::after {d
 .st-key-input_card .hint-row {margin:0 0 14px !important;}
 .st-key-examples {margin-bottom:6px;}
 
-/* select all / clear / counter: one tidy, vertically centred row */
-.st-key-chip_tools {margin-top:14px;}
-.st-key-chip_tools [data-testid="stHorizontalBlock"] {grid-template-columns:150px 150px minmax(0,1fr) !important; align-items:center !important;}
+/* footer row: [Select all] [Clear] [count] ........ [Generate content] */
+.st-key-chip_tools {margin-top:22px; padding-top:20px; border-top:1px solid #DDF0E8;}
+.st-key-chip_tools [data-testid="stHorizontalBlock"] {display:grid !important; grid-template-columns:140px 140px auto minmax(0,1fr) 270px !important; gap:12px !important; align-items:center !important;}
+.st-key-chip_tools [data-testid="stColumn"], .st-key-chip_tools [data-testid="column"] {width:100% !important; min-width:0 !important; flex:none !important;}
 .st-key-chip_tools [data-testid="stMarkdownContainer"], .st-key-chip_tools [data-testid="stMarkdownContainer"] p {margin:0 !important;}
-.st-key-chip_tools [data-testid="stElementContainer"] {display:flex; align-items:center;}
-.st-key-chip_tools .count {display:inline-flex; align-items:center; height:2.4rem; padding:0 16px; border-radius:999px; background:#E3F4EC;
+.st-key-chip_tools [data-testid="stElementContainer"], .st-key-chip_tools div.stButton, .st-key-chip_tools [data-testid="stButton"] {width:100% !important;}
+.st-key-chip_tools .count {display:inline-flex; align-items:center; white-space:nowrap; height:2.5rem; padding:0 16px; border-radius:999px; background:#E3F4EC;
   border:1.5px solid #7FD8BE; color:#0B3B36 !important; font-size:.88rem; font-weight:800;}
-.st-key-sel_all button, .st-key-sel_none button {min-height:2.6rem !important; width:100% !important;}
+.st-key-sel_all button, .st-key-sel_none button {min-height:2.5rem !important; width:100% !important;}
+.divider {height:1px; background:#DDF0E8; margin:24px 0 20px;}
 
-/* Generate button: full width, centred, bold */
-.st-key-go_wrap {margin-top:6px;}
-.st-key-go_wrap, .st-key-go_wrap [data-testid="stElementContainer"], .st-key-go_wrap [data-testid="stButton"], .st-key-go_wrap div.stButton {width:100% !important; display:block !important;}
-.st-key-go_wrap button {width:100% !important; min-height:3.5rem !important; border-radius:14px !important; display:flex; align-items:center; justify-content:center;}
-.st-key-go_wrap button p {color:#FFFFFF !important; font-family:'Sora',sans-serif !important; font-size:1.15rem !important; font-weight:800 !important; letter-spacing:.02em; text-align:center; width:100%;}
-.st-key-go_wrap button p::before {content:"\2726\00a0\00a0"; color:#FDE68A;}
+/* Generate button: compact, right-aligned in the footer row */
+.st-key-go_wrap, .st-key-go_wrap [data-testid="stElementContainer"], .st-key-go_wrap [data-testid="stButton"], .st-key-go_wrap div.stButton {width:100% !important; margin:0 !important;}
+.st-key-go_wrap button {width:100% !important; min-height:2.9rem !important; border-radius:12px !important; box-shadow:0 8px 18px rgba(234,88,12,.32) !important;}
+.st-key-go_wrap button p {color:#FFFFFF !important; font-family:'Sora',sans-serif !important; font-size:1rem !important; font-weight:800 !important; letter-spacing:.02em; text-align:center; width:100%;}
 .st-key-go_wrap button:disabled {background:#9CA3AF !important; box-shadow:none !important;}
+@media (max-width:900px) {
+  .st-key-chip_tools [data-testid="stHorizontalBlock"] {grid-template-columns:1fr 1fr !important;}
+  .st-key-chip_tools [data-testid="stColumn"]:nth-child(4) {display:none !important;}
+  .st-key-chip_tools [data-testid="stColumn"]:nth-child(5) {grid-column:1 / -1;}
+}
 
 /* download buttons + summary row aligned */
 div.stDownloadButton > button p {font-weight:700 !important;}
@@ -435,7 +440,7 @@ with st.container(key="input_card"):
             col.button(ex, key=f"ex_{ex}", on_click=lambda e=ex: st.session_state.update(topic=e))
     keywords = st.text_input("Focus keywords (optional)", placeholder="ai, automation, productivity")
 
-    st.markdown('<div class="section-title" style="margin-top:14px">Deliverables</div>', unsafe_allow_html=True)
+    st.markdown('<div class="divider"></div><div class="section-title">Deliverables</div>', unsafe_allow_html=True)
     st.markdown('<div class="hint-row"><span class="hint">Choose one or several outputs.</span>'
                 '<span class="badge">Only selected outputs are delivered</span></div>', unsafe_allow_html=True)
     with st.container(key="chips"):
@@ -444,18 +449,18 @@ with st.container(key="input_card"):
             on = st.session_state[f"sel_{k}"]
             col.button(label, key=f"chip_{k}", type="primary" if on else "secondary",
                        on_click=toggle, args=(k,))
-    with st.container(key="chip_tools"):
-        b1, b2, b3 = st.columns([1, 1, 3])
-        b1.button("Select all", key="sel_all", on_click=set_all, args=(True,))
-        b2.button("Clear", key="sel_none", on_click=set_all, args=(False,))
-        selected = {k for k, _ in OUTPUTS if st.session_state.get(f"sel_{k}")}
-        b3.markdown(f'<div class="count">{len(selected)} of {len(OUTPUTS)} selected</div>', unsafe_allow_html=True)
+    selected = {k for k, _ in OUTPUTS if st.session_state.get(f"sel_{k}")}
     if "seo" in selected and "blog" not in selected:
         st.markdown('<div class="subnote">SEO editing works on a blog draft written in the background. The blog itself is shown only if you select Blog post.</div>',
                     unsafe_allow_html=True)
-    st.write("")
-    with st.container(key="go_wrap"):
-        go = st.button("Generate content", type="primary", key="go", disabled=not API_KEY)
+    with st.container(key="chip_tools"):
+        b1, b2, b3, _sp, b5 = st.columns(5)
+        b1.button("Select all", key="sel_all", on_click=set_all, args=(True,))
+        b2.button("Clear", key="sel_none", on_click=set_all, args=(False,))
+        b3.markdown(f'<div class="count">{len(selected)} of {len(OUTPUTS)} selected</div>', unsafe_allow_html=True)
+        with b5:
+            with st.container(key="go_wrap"):
+                go = st.button("Generate content", type="primary", key="go", disabled=not API_KEY)
 
 
 # --------------------------------------------------------------- pipeline
