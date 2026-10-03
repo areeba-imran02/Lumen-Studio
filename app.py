@@ -187,6 +187,73 @@ button:disabled {opacity:.45 !important;}
 [data-testid="stExpander"] summary p {color:#0F3D36 !important; font-weight:600;}
 [data-testid="stCode"], [data-testid="stCode"] pre {background:#F1FCF7 !important;}
 [data-testid="stCode"] code, [data-testid="stCode"] span {color:#0F3D36 !important;}
+
+/* =================== FINAL POLISH (readability + hackathon look) =================== */
+/* header: clean solid bar, no blur shadow, hero no longer hidden under it */
+header[data-testid="stHeader"] {background:#F3FBF7 !important; backdrop-filter:none !important; box-shadow:none !important; border-bottom:1px solid #CBEBDF;}
+header[data-testid="stHeader"] * {color:#0B3B36 !important;}
+.block-container {padding-top:4.6rem !important; max-width:1180px;}
+
+/* global text: darker + crisper */
+.stApp, .stApp p, .stApp li, .stApp span {text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;}
+.stApp [data-testid="stWidgetLabel"] p, .stApp [data-testid="stWidgetLabel"] label {color:#052E2A !important; font-weight:700 !important; font-size:.95rem !important;}
+.section-title {font-size:1.2rem !important; color:#052E2A !important; font-weight:800 !important;}
+.hint {color:#24534A !important; font-size:.9rem !important; font-weight:600;}
+.count {color:#0B6B62 !important; font-weight:800 !important;}
+.badge {background:#0B3B36 !important; color:#FFFFFF !important; border:none !important; padding:5px 13px !important;}
+
+/* inputs: white, strong border, dark readable text */
+.stApp div[data-baseweb="textarea"], .stApp div[data-baseweb="input"], .stApp [data-testid="stTextAreaRootElement"],
+.stApp div[data-testid="stTextArea"] div[data-baseweb] > div {background:#FFFFFF !important;}
+.stApp div[data-baseweb="textarea"], .stApp div[data-baseweb="input"] {border:2px solid #0F766E !important; border-radius:12px !important; box-shadow:0 2px 8px rgba(15,118,110,.10);}
+.stApp div[data-baseweb="textarea"]:focus-within, .stApp div[data-baseweb="input"]:focus-within {border-color:#F97316 !important; box-shadow:0 0 0 4px rgba(249,115,22,.18) !important;}
+.stApp div[data-baseweb="base-input"] {border:none !important; background:transparent !important;}
+.stApp textarea, .stApp div[data-testid="stTextInput"] input {background:#FFFFFF !important; color:#052E2A !important; -webkit-text-fill-color:#052E2A !important;
+  font-size:1.05rem !important; font-weight:500 !important; line-height:1.5;}
+.stApp textarea::placeholder, .stApp input::placeholder {color:#4B7A70 !important; -webkit-text-fill-color:#4B7A70 !important; opacity:1 !important; font-weight:400;}
+
+/* example pills: compact row instead of stretched columns */
+.st-key-examples [data-testid="stHorizontalBlock"] {display:flex !important; flex-wrap:wrap; gap:10px; justify-content:flex-start;}
+.st-key-examples [data-testid="stColumn"], .st-key-examples [data-testid="column"] {width:auto !important; flex:0 0 auto !important; min-width:0 !important;}
+.st-key-examples [data-testid="stElementContainer"], .st-key-examples div.stButton {width:auto !important;}
+.st-key-examples button {width:auto !important; min-height:2.3rem !important; padding:4px 18px !important; border-radius:999px !important;
+  background:#E3F4EC !important; border:1.5px solid #7FD8BE !important;}
+.st-key-examples button p {color:#0B3B36 !important; font-weight:700 !important; font-size:.9rem !important;}
+.st-key-examples button:hover {background:#0B3B36 !important; border-color:#0B3B36 !important;}
+.st-key-examples button:hover p {color:#FFFFFF !important;}
+
+/* input card + deliverable chips */
+.st-key-input_card {background:#FFFFFF !important; border:1.5px solid #9BDDC8 !important; box-shadow:0 14px 36px rgba(6,78,59,.14) !important; padding:28px 32px 22px !important;}
+.st-key-chips button[kind="secondary"], .st-key-chips button[data-testid="stBaseButton-secondary"] {background:#FFFFFF !important; border:2px solid #7FD8BE !important;}
+.st-key-chips button[kind="secondary"] p {color:#0B3B36 !important; font-weight:700 !important;}
+.st-key-chips button[kind="primary"], .st-key-chips button[data-testid="stBaseButton-primary"] {background:linear-gradient(120deg,#0B3B36,#0F766E) !important;}
+.st-key-chips button[kind="primary"] p {color:#FFFFFF !important; font-weight:700 !important;}
+
+/* pipeline: no faded text */
+.step {color:#1F4F47 !important; font-weight:600;} .step b {color:#052E2A !important;}
+.step.wait {opacity:1 !important; background:#F1F5F3;}
+.step.done b, .step.done {color:#14532D !important;} .step.active b, .step.active {color:#7C2D12 !important;}
+
+/* sidebar: branded, readable */
+section[data-testid="stSidebar"] {border-right:1px solid rgba(255,255,255,.12); box-shadow:6px 0 24px rgba(4,55,44,.25);}
+section[data-testid="stSidebar"] .block-container, section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {padding-top:1.4rem !important;}
+.brand {display:flex; align-items:center; gap:12px; font-size:1.5rem !important; padding-bottom:2px;}
+.brand .logo {display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:11px; font-size:1.2rem; font-weight:800;
+  color:#064E3B; background:linear-gradient(135deg,#FDE68A,#FB923C); box-shadow:0 4px 12px rgba(0,0,0,.25);}
+.brand-sub {padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.18); color:#A7F3D0 !important; font-weight:700;}
+.side-h {color:#FDE68A !important; font-size:.76rem !important; font-weight:800 !important; padding-top:6px;}
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p, section[data-testid="stSidebar"] label p {color:#FFFFFF !important; font-weight:700 !important; font-size:.92rem !important;}
+section[data-testid="stSidebar"] [data-baseweb="select"] > div, section[data-testid="stSidebar"] div[data-baseweb="input"] {background:#FFFFFF !important; border:2px solid #6EE7B7 !important; border-radius:10px !important;}
+section[data-testid="stSidebar"] [data-baseweb="select"] *, section[data-testid="stSidebar"] input {color:#052E2A !important; -webkit-text-fill-color:#052E2A !important; font-weight:600 !important;}
+section[data-testid="stSidebar"] div[data-baseweb="base-input"] {border:none !important; background:transparent !important;}
+section[data-testid="stSidebar"] .status {background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); padding:9px 14px; border-radius:10px; font-weight:700; color:#FFFFFF;}
+section[data-testid="stSidebar"] .side-note {color:#D1FAE5 !important; font-weight:600;}
+section[data-testid="stSidebar"] button p {color:#FFFFFF !important; font-weight:600 !important;}
+
+/* hero: slightly richer */
+.hero {box-shadow:0 22px 48px rgba(6,78,59,.32) !important;}
+.hero .chips span {background:rgba(255,255,255,.2) !important; font-weight:600; color:#FFFFFF !important;}
+.hero p {color:#F0FFFB !important; font-weight:500;}
 """
 
 # every output gets its own colour theme (bg / text / accent) with strong contrast
@@ -250,7 +317,7 @@ def set_all(value: bool):
 
 # ---------------------------------------------------------------- sidebar
 with st.sidebar:
-    st.markdown('<div class="brand">Lumen Studio</div><div class="brand-sub">Content intelligence</div>',
+    st.markdown('<div class="brand"><span class="logo">L</span>Lumen Studio</div><div class="brand-sub">Content intelligence</div>',
                 unsafe_allow_html=True)
     st.markdown('<div class="side-h">Model</div>', unsafe_allow_html=True)
     model_label = st.selectbox("AI model", list(MODELS.keys()), label_visibility="collapsed")
@@ -303,9 +370,11 @@ with st.container(key="input_card"):
     st.markdown('<div class="section-title">Topic</div>', unsafe_allow_html=True)
     st.text_area("Topic", key="topic", height=92, label_visibility="collapsed",
                  placeholder="Describe what you want to publish, e.g. How small businesses can use AI to save time")
-    ex_cols = st.columns(len(EXAMPLES))
-    for col, ex in zip(ex_cols, EXAMPLES):
-        col.button(ex, key=f"ex_{ex}", on_click=lambda e=ex: st.session_state.update(topic=e))
+    st.markdown('<div class="hint" style="margin:10px 0 6px">Try an example:</div>', unsafe_allow_html=True)
+    with st.container(key="examples"):
+        ex_cols = st.columns(len(EXAMPLES))
+        for col, ex in zip(ex_cols, EXAMPLES):
+            col.button(ex, key=f"ex_{ex}", on_click=lambda e=ex: st.session_state.update(topic=e))
     keywords = st.text_input("Focus keywords (optional)", placeholder="ai, automation, productivity")
 
     st.markdown('<div class="section-title" style="margin-top:14px">Deliverables</div>', unsafe_allow_html=True)
