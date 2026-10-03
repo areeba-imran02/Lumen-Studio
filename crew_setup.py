@@ -11,7 +11,8 @@ MODELS = {
     "Gemini 3.1 Flash-Lite (fast)": "gemini/gemini-3.1-flash-lite",
 }
 LENGTHS = {"Short (~500 words)": 500, "Medium (~900 words)": 900, "Long (~1500 words)": 1500}
-LANGUAGES = ["English", "Urdu", "Roman Urdu", "Hindi"]
+CUSTOM_LANG = "Custom language..."
+LANGUAGES = ["English", "Urdu", "Roman Urdu", CUSTOM_LANG]
 TONES = ["Professional", "Friendly and conversational", "Inspirational", "Technical", "Persuasive", "Humorous"]
 
 OUTPUTS = [  # (key, label)
