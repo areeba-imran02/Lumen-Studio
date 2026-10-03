@@ -1,4 +1,4 @@
-"""Lumen Studio - multi-agent content intelligence (CrewAI + Gemini + DuckDuckGo + Streamlit)."""
+"""Writify Studio - Research. Write. Verify. (CrewAI + Gemini + DuckDuckGo + Streamlit)."""
 import html
 import io
 import os
@@ -26,7 +26,7 @@ load_dotenv()
 from crew_setup import (CUSTOM_LANG, LANGUAGES, LENGTHS, MODELS, OUTPUTS, TONES,  # noqa: E402
                         plan_steps, resolve_outputs, run_studio)
 
-st.set_page_config(page_title="Lumen Studio", page_icon=":material/auto_awesome:", layout="wide")
+st.set_page_config(page_title="Writify Studio | Research. Write. Verify.", page_icon=":material/auto_awesome:", layout="wide")
 
 # ------------------------------------------------------------------ theme
 BASE_CSS = """
@@ -260,7 +260,7 @@ section[data-testid="stSidebar"] button p {color:#FFFFFF !important; font-weight
 .hero {padding:44px 46px !important; margin-bottom:34px !important; box-shadow:0 14px 26px -10px rgba(6,78,59,.38) !important;}
 .hero::after {content:""; position:absolute; right:-70px; bottom:-90px; width:260px; height:260px; border-radius:50%;
   border:2px solid rgba(255,255,255,.18); box-shadow:0 0 0 38px rgba(255,255,255,.05);}
-.hero .hero-title {font-size:3rem !important; letter-spacing:-.025em;}
+.hero .hero-title {font-size:3.1rem !important; letter-spacing:-.025em;}
 .hero .eyebrow {color:#FDE68A !important; margin-top:2px;}
 .st-key-input_card {position:relative; z-index:2;}
 header[data-testid="stHeader"]::before, header[data-testid="stHeader"]::after {display:none !important;}
@@ -313,6 +313,15 @@ header[data-testid="stHeader"]::before, header[data-testid="stHeader"]::after {d
 
 /* download buttons + summary row aligned */
 div.stDownloadButton > button p {font-weight:700 !important;}
+
+/* hero v2: workflow chips */
+.hero .hero-tag {font-family:'Sora',sans-serif; font-size:1.35rem !important; font-weight:700; color:#FDE68A !important; margin:0 0 10px !important;}
+.hero .flow {display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:24px;}
+.hero .flow span {display:inline-flex; align-items:center; gap:9px; padding:8px 16px 8px 8px; border-radius:999px; background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.4); color:#FFFFFF !important; font-weight:700; font-size:.9rem;}
+.hero .flow i {display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:#FDE68A; color:#064E3B;
+  font-style:normal; font-weight:800; font-size:.8rem;}
+.hero .flow em {color:#FDE68A; font-style:normal; font-weight:800; font-size:1.1rem;}
 """
 
 # every output gets its own colour theme (bg / text / accent) with strong contrast
@@ -376,7 +385,7 @@ def set_all(value: bool):
 
 # ---------------------------------------------------------------- sidebar
 with st.sidebar:
-    st.markdown('<div class="brand"><span class="logo">L</span>Lumen Studio</div><div class="brand-sub">Content intelligence</div>',
+    st.markdown('<div class="brand"><span class="logo">W</span>Writify Studio</div><div class="brand-sub">Research. Write. Verify.</div>',
                 unsafe_allow_html=True)
     st.markdown('<div class="side-h">Model</div>', unsafe_allow_html=True)
     model_label = st.selectbox("AI model", list(MODELS.keys()), label_visibility="collapsed")
@@ -411,12 +420,13 @@ with st.sidebar:
 st.markdown(
     """
 <div class="hero">
-  <div class="eyebrow">Multi-agent content intelligence</div>
-  <div class="hero-title">Lumen Studio</div>
-  <p>Turn a single topic into research-backed articles, social content and SEO assets,
-  produced and fact-checked by a team of specialised AI agents.</p>
-  <div class="chips"><span>Researcher</span><span>Blog Writer</span><span>LinkedIn Writer</span>
-  <span>Twitter/X Writer</span><span>SEO Editor</span><span>Fact-Checker</span></div>
+  <div class="eyebrow">&#9679; Multi-agent content studio</div>
+  <div class="hero-title">Writify Studio</div>
+  <p class="hero-tag">One topic in. A fact-checked content package out.</p>
+  <p>A crew of AI agents researches the web, writes the content, optimises it for search
+  and verifies every claim, so you can publish with confidence.</p>
+  <div class="flow"><span><i>1</i>Research</span><em>&rarr;</em><span><i>2</i>Write</span><em>&rarr;</em>
+  <span><i>3</i>Edit for SEO</span><em>&rarr;</em><span><i>4</i>Fact-check</span></div>
 </div>
 """,
     unsafe_allow_html=True,
