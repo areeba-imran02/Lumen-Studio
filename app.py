@@ -94,8 +94,8 @@ button[kind="secondary"]:hover, button[data-testid="stBaseButton-secondary"]:hov
 button[kind="primary"], button[data-testid="stBaseButton-primary"] {background:linear-gradient(120deg,#0F766E,#16A34A) !important; border:none !important;
   box-shadow:0 6px 16px rgba(15,118,110,.28);}
 button[kind="primary"] p, button[data-testid="stBaseButton-primary"] p {color:#FFFFFF !important;}
-.st-key-chips button[kind="primary"] p::before, .st-key-chips button[data-testid="stBaseButton-primary"] p::before {content:"\2713\00a0\00a0";}
-.st-key-chips button {min-height:3rem; font-size:.95rem;}
+.st-key-chips button[kind="primary"] p::before, .st-key-chips button[data-testid="stBaseButton-primary"] p::before {content:"\\2713\\00a0\\00a0";}
+.st-key-chips button p {white-space:normal !important; overflow:visible !important; text-overflow:clip !important; line-height:1.25;}
 .st-key-go_wrap button[kind="primary"], .st-key-go_wrap button[data-testid="stBaseButton-primary"] {
   background:linear-gradient(120deg,#C2410C,#F97316) !important; min-height:3.2rem; font-size:1.05rem; box-shadow:0 10px 24px rgba(234,88,12,.35);}
 button:disabled {opacity:.45 !important;}
