@@ -254,6 +254,32 @@ section[data-testid="stSidebar"] button p {color:#FFFFFF !important; font-weight
 .hero {box-shadow:0 22px 48px rgba(6,78,59,.32) !important;}
 .hero .chips span {background:rgba(255,255,255,.2) !important; font-weight:600; color:#FFFFFF !important;}
 .hero p {color:#F0FFFB !important; font-weight:500;}
+
+/* =================== FINAL POLISH 2 =================== */
+/* hero shadow was bleeding over the input card (fade at top of card) */
+.hero {padding:44px 46px !important; margin-bottom:34px !important; box-shadow:0 14px 26px -10px rgba(6,78,59,.38) !important;}
+.hero::after {content:""; position:absolute; right:-70px; bottom:-90px; width:260px; height:260px; border-radius:50%;
+  border:2px solid rgba(255,255,255,.18); box-shadow:0 0 0 38px rgba(255,255,255,.05);}
+.hero .hero-title {font-size:3rem !important; letter-spacing:-.025em;}
+.hero .eyebrow {color:#FDE68A !important; margin-top:2px;}
+.st-key-input_card {position:relative; z-index:2;}
+header[data-testid="stHeader"]::before, header[data-testid="stHeader"]::after {display:none !important;}
+
+/* topic + keywords: border on the real <textarea>/<input> so it can never be overridden by wrappers */
+.st-key-input_card [data-testid="stTextArea"] div, .st-key-input_card [data-testid="stTextInput"] div {
+  border:none !important; box-shadow:none !important; background:transparent !important; overflow:visible !important;}
+.st-key-input_card textarea, .st-key-input_card [data-testid="stTextInput"] input {
+  background:#FFFFFF !important; border:2px solid #0F766E !important; border-radius:12px !important;
+  padding:13px 16px !important; color:#052E2A !important; -webkit-text-fill-color:#052E2A !important;
+  font-size:1.05rem !important; font-weight:500 !important; box-shadow:0 2px 10px rgba(15,118,110,.12) !important;}
+.st-key-input_card textarea:focus, .st-key-input_card [data-testid="stTextInput"] input:focus {
+  border-color:#F97316 !important; outline:none !important; box-shadow:0 0 0 4px rgba(249,115,22,.20) !important;}
+.st-key-input_card textarea::placeholder, .st-key-input_card input::placeholder {color:#527F75 !important; -webkit-text-fill-color:#527F75 !important; opacity:1 !important;}
+
+/* select all / clear: bolder text */
+.st-key-sel_all button p, .st-key-sel_none button p {font-weight:800 !important; font-size:.82rem !important; letter-spacing:.06em;}
+.st-key-sel_none button {border:2px dashed #BE123C !important;}
+.st-key-chips button[kind="secondary"]:hover, .st-key-chips button[data-testid="stBaseButton-secondary"]:hover {background:#E3F4EC !important; border-color:#0F766E !important;}
 """
 
 # every output gets its own colour theme (bg / text / accent) with strong contrast
