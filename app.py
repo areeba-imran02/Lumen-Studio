@@ -30,7 +30,7 @@ st.set_page_config(page_title="Writify Studio | Research. Write. Verify.", page_
 
 # ------------------------------------------------------------------ theme
 BASE_CSS = """
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
 
 .stApp {background: linear-gradient(160deg,#E6FAF1 0%,#FFF9E6 55%,#FFEBDD 100%) !important; color:#0F3D36 !important;}
 header[data-testid="stHeader"] {background: rgba(230,250,241,.85) !important; backdrop-filter: blur(6px);}
@@ -338,6 +338,30 @@ div.stDownloadButton > button p {font-weight:700 !important;}
 /* sidebar: same input size everywhere, less empty space at the top */
 section[data-testid="stSidebar"] div[data-testid="stTextInput"] input {font-size:.95rem !important; font-weight:600 !important; padding:.55rem .8rem !important; border:none !important; box-shadow:none !important;}
 section[data-testid="stSidebar"] [data-testid="stSidebarHeader"] {height:1.2rem !important; min-height:0 !important; padding:0 !important;}
+
+/* =================== FINAL POLISH 5: calm green/teal brand, clean title, no pill clutter =================== */
+/* title: Space Grotesk, white + mint, subtle depth only */
+.hero .hero-title, .brand .bname {font-family:'Space Grotesk','Sora',sans-serif !important;}
+.hero .hero-title {font-size:3.3rem !important; font-weight:700 !important; letter-spacing:-.01em !important; line-height:1.1 !important; margin:4px 0 12px !important;}
+.w3a, .w3b {font-family:'Space Grotesk','Sora',sans-serif !important; font-weight:700 !important; letter-spacing:-.01em !important;}
+.hero .hero-title .w3a {color:#FFFFFF !important; text-shadow:0 2px 0 rgba(4,40,34,.55), 0 6px 16px rgba(0,0,0,.25) !important;}
+.hero .hero-title .w3b {color:#A7F3D0 !important; text-shadow:0 2px 0 rgba(4,40,34,.55), 0 6px 16px rgba(0,0,0,.25) !important;}
+.brand .bname {font-size:1.4rem !important; font-weight:700;}
+.brand .w3a {color:#FFFFFF !important; text-shadow:0 1px 0 rgba(0,0,0,.35) !important;}
+.brand .w3b {color:#A7F3D0 !important; text-shadow:0 1px 0 rgba(0,0,0,.35) !important;}
+.brand .logo {background:linear-gradient(135deg,#A7F3D0,#2DD4BF) !important; color:#053B33 !important;}
+
+/* one green family: remove yellow/orange from hero + sidebar labels */
+.hero .eyebrow {color:#A7F3D0 !important;}
+.hero .hero-tag {color:#D1FAE5 !important; font-family:'Space Grotesk','Sora',sans-serif !important; font-weight:600 !important; font-size:1.3rem !important;}
+.side-h {color:#99F6E4 !important;}
+.hero {background:linear-gradient(120deg,#053B33 0%,#0B5D52 50%,#0F8F82 100%) !important;}
+
+/* hero feature line: plain text with thin dividers (no button look) */
+.hero .feat {display:flex; flex-wrap:wrap; margin-top:26px; padding-top:18px; border-top:1px solid rgba(255,255,255,.22);}
+.hero .feat span {color:#ECFDF5 !important; font-weight:600; font-size:.92rem; padding:0 16px; border-left:1px solid rgba(255,255,255,.28); line-height:1.2;}
+.hero .feat span:first-child {padding-left:0; border-left:none;}
+@media (max-width:820px) {.hero .feat span {padding:4px 12px 4px 0; border-left:none;}}
 """
 
 # every output gets its own colour theme (bg / text / accent) with strong contrast
@@ -441,8 +465,7 @@ st.markdown(
   <p class="hero-tag">One topic in. A fact-checked content package out.</p>
   <p>A crew of AI agents researches the web, writes the content, optimises it for search
   and verifies every claim, so you can publish with confidence.</p>
-  <div class="flow"><span><i>1</i>Research</span><em>&rarr;</em><span><i>2</i>Write</span><em>&rarr;</em>
-  <span><i>3</i>Edit for SEO</span><em>&rarr;</em><span><i>4</i>Fact-check</span></div>
+  <div class="feat"><span>Research report</span><span>Blog post</span><span>LinkedIn post</span><span>Twitter/X thread</span><span>SEO report</span><span>Fact-check</span></div>
 </div>
 """,
     unsafe_allow_html=True,
